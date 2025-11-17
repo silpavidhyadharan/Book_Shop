@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<title>BookSaw - Contact</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/normalize.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/icomoon/icomoon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/vendor.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
+
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+
+	<div id="header-wrap">
+
+		<div class="top-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+<!--						<div class="social-links">-->
+<!--							<ul>-->
+<!--								<li>-->
+<!--									<a href="#"><i class="icon icon-facebook"></i></a>-->
+<!--								</li>-->
+<!--								<li>-->
+<!--									<a href="#"><i class="icon icon-twitter"></i></a>-->
+<!--								</li>-->
+<!--								<li>-->
+<!--									<a href="#"><i class="icon icon-youtube-play"></i></a>-->
+<!--								</li>-->
+<!--								<li>-->
+<!--									<a href="#"><i class="icon icon-behance-square"></i></a>-->
+<!--								</li>-->
+<!--							</ul>-->
+<!--						</div>&lt;!&ndash;social-links&ndash;&gt;-->
+					</div>
+					<div class="col-md-6">
+						<div class="right-element">
+							{% if request.session.Name %}
+							<a href="{% url 'user_logout' %}" class="user-account for-buy"><i
+									class="icon icon-user"></i><span>Welcome {{request.session.Name}} / Logout</span>
+							</a>
+							{% else %}
+							<a href="{% url 'login_page' %}" class="user-account for-buy"><i
+									class="icon icon-user"></i><span>Login</span></a>
+
+							{% endif %}
+<!--							<a href="#" class="user-account for-buy"><i-->
+<!--									class="icon icon-user"></i><span>Account</span></a>-->
+							<a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart</span></a>
+
+							<div class="action-menu">
+
+								<div class="search-bar">
+									<a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+										<i class="icon icon-search"></i>
+									</a>
+									<form role="search" method="get" class="search-box">
+										<input class="search-field text search-input" placeholder="Search"
+											type="search">
+									</form>
+								</div>
+							</div>
+
+						</div><!--top-right-->
+					</div>
+
+				</div>
+			</div>
+		</div><!--top-content-->
+
+		<header id="header">
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-md-2">
+						<div class="main-logo">
+							<a href="index.html"><img src="{% static 'web/images/main-logo.png' %}" alt="logo"></a>
+						</div>
+
+					</div>
+
+					<div class="col-md-10">
+
+						<nav id="navbar">
+							<div class="main-menu stellarnav">
+								<ul class="menu-list">
+									<li class="menu-item"><a href="{% url 'home_page' %}">Home</a></li>
+									<li class="menu-item"><a href="{% url 'about_page' %}" class="nav-link">About</a></li>
+
+									<li class="menu-item has-sub">
+										<a href="#" class="nav-link">Categories</a>
+
+										<ul>
+											{% for i in categories %}
+											<li class="active"><a href="{% url 'filtered_Books' book_category=i.name %}">{{i.name}}</a></li>
+											{% endfor %}
+										</ul>
+
+									</li>
+									<li class="menu-item"><a href="{% url 'popular_books_page' %}" class="nav-link">Popular Books</a></li>
+									<li class="menu-item active"><a href="{% url 'contact_page' %}" class="nav-link">Contact</a></li>
+									<li class="menu-item"><a href="{% url 'checkout_page' %}" class="nav-link">Check Out</a></li>
+
+<!--									<li class="menu-item"><a href="#latest-blog" class="nav-link">Articles</a></li>-->
+<!--									<li class="menu-item"><a href="#download-app" class="nav-link">Download App</a></li>-->
+								</ul>
+
+								<div class="hamburger">
+									<span class="bar"></span>
+									<span class="bar"></span>
+									<span class="bar"></span>
+								</div>
+
+							</div>
+						</nav>
+
+					</div>
+
+				</div>
+			</div>
+		</header>
+
+	</div><!--header-wrap-->
+{% block content %}
+
+	<section id="best-selling" class="leaf-pattern-overlay">
+		<div class="corner-pattern-overlay"></div>
+		<div class="container">
+			<div class="row justify-content-center">
+
+				<div class="col-md-8">
+
+					<div class="row">
+
+						<div class="col-md-6">
+							<figure class="products-thumb">
+								<img src="{% static 'web/images/memory.jpg' %}" alt="book" class="single-image">
+							</figure>
+						</div>
+
+						<div class="col-md-6">
+							<div class="product-entry">
+								<h2 class="section-title divider">Get in Touch with BookSaw</h2>
+
+								<div class="products-content">
+									<h3 class="item-title">We’re always happy to hear from fellow book lovers!</h3>
+<!--									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,-->
+<!--										libero ipsum enim pharetra hac.</p>-->
+<!--									<div class="item-price">$ 45.00</div>-->
+									<div class="btn-wrap">
+										<a href="#" class="btn-accent-arrow">shop it now <i
+												class="icon icon-ns-arrow-right"></i></a>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+					<!-- / row -->
+
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+	<section id="quotation" class="align-center pb-5 mb-5">
+		<div class="inner-content">
+			<h3 class="section-title divider" style="padding-top:40px;">“Because every story deserves to be heard.”</h3>
+			<blockquote data-aos="fade-up">
+<!--				<q>“The more that you read, the more things you will know. The more that you learn, the more places-->
+<!--					you’ll go.”</q>-->
+<!--				<div class="author-name">Dr. Seuss</div>-->
+			</blockquote>
+		</div>
+	</section>
+
+
+    <section id="contact-form" class="leaf-pattern-overlay pb-5">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+
+				<div class="section-header text-center mb-5">
+					<h2 class="section-title divider">Send Us a Message</h2>
+					<p class="text-muted">
+						Have a question, suggestion, or feedback? We’d love to hear from you.<br>
+						Fill out the form below and our team will get back to you soon.
+					</p>
+				</div>
+
+				<form class="contact-form">
+					<div class="row g-3">
+						<div class="col-md-6">
+							<input type="text" name="name" class="form-control" placeholder="Your Name" required>
+						</div>
+						<div class="col-md-6">
+							<input type="email" name="email" class="form-control" placeholder="Your Email" required>
+						</div>
+						<div class="col-md-12">
+							<input type="text" name="subject" class="form-control" placeholder="Subject">
+						</div>
+						<div class="col-md-12">
+							<textarea name="message" class="form-control" rows="6" placeholder="Your Message" required></textarea>
+						</div>
+						<div class="col-md-12 text-center pt-3">
+							<button type="submit" class="btn btn-accent btn-lg">
+								Send Message <i class="icon icon-send"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="contact-info" class="py-5" style="background-color:#f9f7f4;">
+	<div class="container">
+		<div class="row justify-content-center text-center mb-5">
+			<div class="col-md-8">
+				<h2 class="section-title divider mb-3">Get in Touch</h2>
+				<p class="text-muted" style="font-size:1.1rem;">
+					We’re here to help you with anything — from book recommendations to order support.<br>
+					Reach out through the channels below and we’ll be happy to assist.
+				</p>
+			</div>
+		</div>
+
+		<div class="row text-center">
+			<div class="col-md-4 mb-4">
+				<div class="info-card p-4 shadow-sm rounded-3 bg-white h-100">
+					<div class="icon-circle mx-auto mb-3">
+						<i class="icon icon-envelope"></i>
+					</div>
+					<h5 class="fw-bold mb-2">Email Us</h5>
+					<p class="text-muted mb-1">For general inquiries & support</p>
+					<a href="mailto:support@booksaw.com" class="text-decoration-none text-dark fw-semibold">
+						support@booksaw.com
+					</a>
+				</div>
+			</div>
+
+			<div class="col-md-4 mb-4">
+				<div class="info-card p-4 shadow-sm rounded-3 bg-white h-100">
+					<div class="icon-circle mx-auto mb-3">
+						<i class="icon icon-phone"></i>
+					</div>
+					<h5 class="fw-bold mb-2">Call Us</h5>
+					<p class="text-muted mb-1">Mon–Fri, 9AM – 6PM</p>
+					<a href="tel:+11234567890" class="text-decoration-none text-dark fw-semibold">
+						+1 (123) 456-7890
+					</a>
+				</div>
+			</div>
+
+			<div class="col-md-4 mb-4">
+				<div class="info-card p-4 shadow-sm rounded-3 bg-white h-100">
+					<div class="icon-circle mx-auto mb-3">
+						<i class="icon icon-location"></i>
+					</div>
+					<h5 class="fw-bold mb-2">Visit Us</h5>
+					<p class="text-muted mb-1">BookSaw Headquarters</p>
+					<p class="mb-0 fw-semibold text-dark">
+						123 Book Street, Reading City, NY 10001
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+	<section id="subscribe">
+		<div class="container">
+			<div class="row justify-content-center">
+
+				<div class="col-md-8">
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<div class="title-element">
+								<h2 class="section-title divider">Subscribe to our newsletter</h2>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+
+							<div class="subscribe-content" data-aos="fade-up">
+								<p>Sed eu feugiat amet, libero ipsum enim pharetra hac dolor sit amet, consectetur. Elit
+									adipiscing enim pharetra hac.</p>
+								<form id="form">
+									<input type="text" name="email" placeholder="Enter your email addresss here">
+									<button class="btn-subscribe">
+										<span>send</span>
+										<i class="icon icon-send"></i>
+									</button>
+								</form>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+    {% endblock %}
+		<footer id="footer">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-4">
+
+					<div class="footer-item">
+						<div class="company-brand">
+							<img src="{% static 'web/images/main-logo.png' %}" alt="logo" class="footer-logo">
+							<p>Your one-stop destination for books of every genre. Discover, explore, and enjoy reading with us.
+								We bring stories to life and knowledge to your hands.</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>About Us</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">vision</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Mission </a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Articles</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Our community</a>
+							</li>
+<!--							<li class="menu-item">-->
+<!--								<a href="#">donate</a>-->
+<!--							</li>-->
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Discover</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Books</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Authors</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Description</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Book Price</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>My account</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Sign In</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">View Cart</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Book Categories</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Popular Books</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Check Out</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Help</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Help center</a>
+							</li>
+<!--							<li class="menu-item">-->
+<!--								<a href="#">Report a problem</a>-->
+<!--							</li>-->
+<!--							<li class="menu-item">-->
+<!--								<a href="#">Suggesting edits</a>-->
+<!--							</li>-->
+							<li class="menu-item">
+								<a href="#">Contact us</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- / row -->
+
+		</div>
+	</footer>
+
+	<div id="footer-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="copyright">
+						<div class="row">
+
+							<div class="col-md-6">
+								<p>© 2022 All rights reserved<a
+										href="{% url 'home_page' %}" target="_blank"> Booksaw</a></p>
+							</div>
+
+							<div class="col-md-6">
+								<div class="social-links align-right">
+									<ul>
+										<li>
+											<a href="#"><i class="icon icon-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-twitter"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-youtube-play"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-behance-square"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</div><!--grid-->
+
+				</div><!--footer-bottom-content-->
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'web/js/jquery-1.11.0.min.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<script src="{% static 'web/js/plugins.js' %}"></script>
+	<script src="{% static 'web/js/script.js' %}"></script>
+
+</body>
+
+</html>

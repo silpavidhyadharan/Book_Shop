@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card" style="margin:auto;">
+                <div class="card-body">
+                  <h4 class="card-title" style="text-align:center;">Edit Category Form</h4>
+                  <form class="forms-sample" enctype="multipart/form-data" method="post" action="{% url 'update_category' category_id=category.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Category Name</label>
+                      <input type="text" name="c_name" value="{{category.name}}" class="form-control" id="exampleInputUsername1">
+                    </div>
+                      <label for="exampleInputUsername1">Description</label>
+                      <textarea class="form-control" name="c_description" id="exampleTextarea1" rows="4">{{category.description}}</textarea>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Cover Image</label>
+                        <img src="{{category.cover_image.url}}" width="100px">
+                      <input type="file" name="c_image" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mr-2">Update</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div></body>
+</html>
+{% endblock %}

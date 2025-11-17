@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card mx-auto" style="max-width: 600px;">
+  <div class="card-body">
+    <h4 class="card-title mb-4">Edit Book</h4>
+
+    <form class="forms-sample" method="post" enctype="multipart/form-data" action="{% url 'update_book_data' Book_id=book.id %}">
+      {% csrf_token %}
+      <!-- Title -->
+      <div class="form-group">
+        <label for="bookTitle">Title</label>
+        <input type="text" value="{{book.title}}"  class="form-control" name="b_title" id="bookTitle">
+      </div>
+
+      <!-- Author -->
+      <div class="form-group">
+        <label for="bookAuthor">Author</label>
+        <input type="text" value="{{book.author}}" class="form-control" name="b_author" id="bookAuthor">
+      </div>
+
+      <!-- Category -->
+      <div class="form-group">
+        <label for="bookCategory">Category</label>
+        <select name="b_category" class="form-control" id="bookCategory">
+          <option selected>{{book.category}}Choose a category</option>
+          {% for i in categories %}
+          <option>{{i.name}}</option>
+          {% endfor%}
+        </select>
+      </div>
+
+      <!-- Price -->
+      <div class="form-group">
+        <label for="bookPrice">Price</label>
+        <input type="text" name="b_price" value="{{book.price}}" class="form-control" id="bookPrice">
+      </div>
+
+      <!-- Publisher -->
+      <div class="form-group">
+        <label for="bookPublisher">Publisher</label>
+        <input type="text" name="b_publisher" value="{{book.publisher}}" class="form-control" id="bookPublisher">
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="bookDescription">Description</label>
+        <textarea class="form-control" id="bookDescription" name="b_description" rows="4">{{book.description}}</textarea>
+      </div>
+
+      <!-- Cover Image -->
+      <div class="form-group">
+        <label for="bookCover">Cover Image</label>
+          <img src="{{book.cover_image.url}}"width="100px;">
+        <input type="file" class="form-control" id="bookCover" name="b_image">
+      </div>
+
+      <!-- Buttons -->
+      <button type="submit" class="btn btn-primary mr-2">Update</button>
+      <button type="reset" class="btn btn-light">Cancel</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card" style="margin:auto;">
+                <div class="card-body">
+                  <h4 class="card-title" style="text-align:center;">Add Category Form</h4>
+                  <form class="forms-sample" method="post" enctype="multipart/form-data" action="{% url 'save_category_data' %}">
+                      {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Category Name</label>
+                      <input type="text" name="c_name" class="form-control" id="exampleInputUsername1">
+                    </div>
+                      <label for="exampleInputUsername1">Description</label>
+                      <textarea class="form-control" name="c_description" id="exampleTextarea1" rows="4"></textarea>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Cover Image</label>
+                      <input type="file" name="c_image" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div></body>
+</html>
+{% endblock %}

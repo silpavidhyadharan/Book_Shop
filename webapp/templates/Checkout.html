@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<title>BookSaw - About</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/normalize.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/icomoon/icomoon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/vendor.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
+
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+
+	<div id="header-wrap">
+
+		<div class="top-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+<!--						<div class="social-links">-->
+<!--							<ul>-->
+<!--								<li>-->
+<!--									<a href="#"><i class="icon icon-facebook"></i></a>-->
+<!--								</li>-->
+<!--								<li>-->
+<!--									<a href="#"><i class="icon icon-twitter"></i></a>-->
+<!--								</li>-->
+<!--								<li>-->
+<!--									<a href="#"><i class="icon icon-youtube-play"></i></a>-->
+<!--								</li>-->
+<!--								<li>-->
+<!--									<a href="#"><i class="icon icon-behance-square"></i></a>-->
+<!--								</li>-->
+<!--							</ul>-->
+<!--						</div>&lt;!&ndash;social-links&ndash;&gt;-->
+					</div>
+					<div class="col-md-6">
+						<div class="right-element">
+							{% if request.session.Name %}
+							<a href="{% url 'user_logout' %}" class="user-account for-buy"><i
+									class="icon icon-user"></i><span>Welcome {{request.session.Name}} / Logout</span>
+							</a>
+							{% else %}
+							<a href="{% url 'login_page' %}" class="user-account for-buy"><i
+									class="icon icon-user"></i><span>Login</span></a>
+
+							{% endif %}
+<!--							<a href="#" class="user-account for-buy"><i-->
+<!--									class="icon icon-user"></i><span>Account</span></a>-->
+							<a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart</span></a>
+
+							<div class="action-menu">
+
+								<div class="search-bar">
+									<a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+										<i class="icon icon-search"></i>
+									</a>
+									<form role="search" method="get" class="search-box">
+										<input class="search-field text search-input" placeholder="Search"
+											type="search">
+									</form>
+								</div>
+							</div>
+
+						</div><!--top-right-->
+					</div>
+
+				</div>
+			</div>
+		</div><!--top-content-->
+
+		<header id="header">
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-md-2">
+						<div class="main-logo">
+							<a href="index.html"><img src="{% static 'web/images/main-logo.png' %}" alt="logo"></a>
+						</div>
+
+					</div>
+
+					<div class="col-md-10">
+
+						<nav id="navbar">
+							<div class="main-menu stellarnav">
+								<ul class="menu-list">
+									<li class="menu-item"><a href="{% url 'home_page' %}">Home</a></li>
+									<li class="menu-item"><a href="{% url 'about_page' %}" class="nav-link">About</a></li>
+
+									<li class="menu-item has-sub">
+										<a href="#" class="nav-link">Categories</a>
+
+										<ul>
+											{% for i in categories %}
+											<li class="active"><a href="{% url 'filtered_Books' book_category=i.name %}">{{i.name}}</a></li>
+											{% endfor %}
+										</ul>
+
+									</li>
+									<li class="menu-item"><a href="{% url 'popular_books_page' %}" class="nav-link">Popular Books</a></li>
+									<li class="menu-item"><a href="{% url 'contact_page' %}" class="nav-link">Contact</a></li>
+									<li class="menu-item active"><a href="{% url 'checkout_page' %}" class="nav-link">Check Out</a></li>
+
+<!--									<li class="menu-item"><a href="#latest-blog" class="nav-link">Articles</a></li>-->
+<!--									<li class="menu-item"><a href="#download-app" class="nav-link">Download App</a></li>-->
+								</ul>
+
+								<div class="hamburger">
+									<span class="bar"></span>
+									<span class="bar"></span>
+									<span class="bar"></span>
+								</div>
+
+							</div>
+						</nav>
+
+					</div>
+
+				</div>
+			</div>
+		</header>
+
+	</div><!--header-wrap-->
+
+
+    <section class="checkout-section py-5">
+    <div class="container">
+        <h1 class="mb-4 text-center">Checkout</h1>
+
+        <div class="row g-5">
+            <!-- Billing Details -->
+            <div class="col-lg-7">
+                <div class="card shadow-sm border-0 p-4">
+                    <h5 class="mb-4">Billing Details</h5>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" id="firstName" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" id="lastName" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" id="address" class="form-control">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" id="city" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="zip" class="form-label">Postal Code</label>
+                                <input type="text" id="zip" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country</label>
+                            <select id="country" class="form-select">
+                                <option value="">Select Country</option>
+                                <option>United States</option>
+                                <option>United Kingdom</option>
+                                <option>Canada</option>
+                                <option>Australia</option>
+                            </select>
+                        </div>
+
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" id="createAccount">
+                            <label class="form-check-label" for="createAccount">Create an account?</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-lg-5">
+                <div class="card shadow-sm border-0 p-4">
+                    <h2 class="mb-4">Your Order</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Book</th>
+                                <th class="text-end">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Book Price</td>
+                                <td class="text-end">1200</td>
+                            </tr>
+                            <tr>
+                                <td>GST</td>
+                                <td class="text-end">50</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping</td>
+                                <td class="text-end">200</td>
+                            </tr>
+                            <tr class="fw-bold">
+                                <td>Total</td>
+                                <td class="text-end">1450</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6 class="mt-4 mb-3">Payment Method</h6>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="payment" id="creditCard" checked>
+                        <label class="form-check-label" for="creditCard">Credit / Debit Card</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="payment" id="paypal">
+                        <label class="form-check-label" for="paypal">Gpay</label>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="radio" name="payment" id="cod">
+                        <label class="form-check-label" for="cod">Cash on Delivery</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark w-100 py-2">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    	<section id="subscribe">
+		<div class="container">
+			<div class="row justify-content-center">
+
+				<div class="col-md-8">
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<div class="title-element">
+								<h2 class="section-title divider">Subscribe to our newsletter</h2>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+
+							<div class="subscribe-content" data-aos="fade-up">
+								<p>Sed eu feugiat amet, libero ipsum enim pharetra hac dolor sit amet, consectetur. Elit
+									adipiscing enim pharetra hac.</p>
+								<form id="form">
+									<input type="text" name="email" placeholder="Enter your email addresss here">
+									<button class="btn-subscribe">
+										<span>send</span>
+										<i class="icon icon-send"></i>
+									</button>
+								</form>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+		<footer id="footer">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-4">
+
+					<div class="footer-item">
+						<div class="company-brand">
+							<img src="{% static 'web/images/main-logo.png' %}" alt="logo" class="footer-logo">
+							<p>Your one-stop destination for books of every genre. Discover, explore, and enjoy reading with us.
+								We bring stories to life and knowledge to your hands.</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>About Us</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">vision</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Mission </a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Articles</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Our community</a>
+							</li>
+<!--							<li class="menu-item">-->
+<!--								<a href="#">donate</a>-->
+<!--							</li>-->
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Discover</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Books</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Authors</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Description</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Book Price</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>My account</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Sign In</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">View Cart</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Book Categories</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Popular Books</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">Check Out</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-2">
+
+					<div class="footer-menu">
+						<h5>Help</h5>
+						<ul class="menu-list">
+							<li class="menu-item">
+								<a href="#">Help center</a>
+							</li>
+<!--							<li class="menu-item">-->
+<!--								<a href="#">Report a problem</a>-->
+<!--							</li>-->
+<!--							<li class="menu-item">-->
+<!--								<a href="#">Suggesting edits</a>-->
+<!--							</li>-->
+							<li class="menu-item">
+								<a href="#">Contact us</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- / row -->
+
+		</div>
+	</footer>
+
+	<div id="footer-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="copyright">
+						<div class="row">
+
+							<div class="col-md-6">
+								<p>© 2022 All rights reserved<a
+										href="{% url 'home_page' %}" target="_blank"> Booksaw</a></p>
+							</div>
+
+							<div class="col-md-6">
+								<div class="social-links align-right">
+									<ul>
+										<li>
+											<a href="#"><i class="icon icon-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-twitter"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-youtube-play"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="icon icon-behance-square"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</div><!--grid-->
+
+				</div><!--footer-bottom-content-->
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'web/js/jquery-1.11.0.min.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<script src="{% static 'web/js/plugins.js' %}"></script>
+	<script src="{% static 'web/js/script.js' %}"></script>
+
+</body>
+
+</html>
