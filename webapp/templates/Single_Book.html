@@ -161,9 +161,12 @@
 									<h3 class="item-title">{{book.title}}</h3>
 									<p>{{book.description}}</p>
 									<div class="item-price">Rs. {{book.price}}</div>
+
+
                                 <form>
-                                  <input type="number" placeholder="Quantity" class="form-control" min="0">
-                                  <input type="text" placeholder="Total" class="form-control">
+                                  <input type="number" placeholder="Quantity" id="quantity" class="form-control" min="1">
+								  <input type="text" value="{{book.price}}" id="price" class="form-control">
+                                  <input type="text" placeholder="Total" id="total" class="form-control">
 
 									{% if request.session.Name %}
                                   <div class="btn-wrap">
@@ -176,6 +179,18 @@
 									{% endif %}
 
                                   </form>
+									<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+									<script>
+										$(document).ready(function(){
+											$("#quantity").change(function(){
+												x = document.getElementById("quantity").value;
+												y = document.getElementById("price").value;
+												result = x*y;
+												document.getElementById("total").value=result;
+											})
+										})
+
+									</script>
 
                                 </div>
 							</div>
@@ -345,7 +360,7 @@
 			</div>
 		</div>
 	</div>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="{% static 'web/js/jquery-1.11.0.min.js' %}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
