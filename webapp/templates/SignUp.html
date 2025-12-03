@@ -21,7 +21,8 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form id="signup-form" method="post" action="{% url 'save_signup_data' %}" class="signup-form" style="margin-top:40px;">
+                    <form id="signup-form" method="post" action="{% url 'save_signup_data' %}"
+                          class="signup-form" style="margin-top:40px;" name="myform" onsubmit="myfunction()">
                         {% csrf_token %}
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
@@ -49,6 +50,39 @@
                         Have already an account ? <a href="{% url 'login_page' %}" class="loginhere-link">Login here</a>
                     </p>
                 </div>
+            <script>
+                function myfunction(){
+                    let a = document.myform.name.value;
+                    let b = document.myform.email.value;
+                    let c = document.myform.password.value;
+                    let d = document.myform.confirm_password.value;
+
+                    if (a == "" || a == null){
+                        alert("Name can't be null or blank..!");
+                    }
+                    else if (b == "" || b == null){
+                        alert("Email cannot be null...!");
+                    }
+                    else if (c == "" || c == null){
+                        alert("Password cannot be empty!");
+                    }
+                    else if (d == "" || d == null){
+                        alert("Confirm Password cannot be empty!");
+                    }
+                    else if (c !== d){
+                        alert("Passwords do not match!");
+                    }
+                    else if(c.length<6){
+                        alert("Password must contain 6 characters")
+                    }
+                    else if (c==d){
+                        return true;
+                    }
+                    else{
+                        alert("Password doesn't match...!'")
+                    }
+                }
+            </script>
             </div>
         </section>
 

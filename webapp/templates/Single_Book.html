@@ -170,7 +170,7 @@
 
 									{% if request.session.Name %}
                                   <div class="btn-wrap">
-                                      <a href="#" class="btn-accent-arrow"><button type="submit" style="border-radius:10px;" >Add to cart</button></a>
+                                      <button type="submit" style="border-radius:10px;" ><a href="{% url 'cart_page' %}" class="btn-accent-arrow">Add to cart</a></button>
                                   </div>
 									{% else %}
 									<div class="btn-wrap">
