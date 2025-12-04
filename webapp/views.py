@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from adminApp.models import CategoryDb,BookDb
-from webapp.models import SignUpDb
+from webapp.models import SignUpDb,ContactDb
 # Create your views here.
 def home_page(request):
     categories = CategoryDb.objects.all()
@@ -67,6 +67,20 @@ def user_login(request):
             return redirect(login_page)
     else:
         return redirect(login_page)
+
+def save_contact(request):
+    if request.method == "POST":
+        user_name = request.POST.get('name')
+        user_email = request.POST.get('email')
+        user_subject = request.POST.get('subject')
+        user_message = request.POST.get('message')
+        obj = ContactDb(name=user_name,email=user_email,subject=user_subject,message=user_message)
+        obj.save()
+        return redirect(contact_page)
+
+def display_messages(request):
+    data = ContactDb.objects.all()
+    return render(request,"View_messages.html",{'data':data})
 
 def user_logout(request):
     del request.session['Name']

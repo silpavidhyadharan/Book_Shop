@@ -13,5 +13,6 @@ urlpatterns = [
     path('save_signup_data/',views.save_signup_data,name="save_signup_data"),
     path('user_login/',views.user_login,name="user_login"),
     path('user_logout/',views.user_logout,name="user_logout"),
-    path('cart_page/',views.cart_page,name="cart_page")
+    path('cart_page/',views.cart_page,name="cart_page"),
+    path('save_contact/',views.save_contact,name="save_contact"),
 ]
