@@ -61,6 +61,28 @@
   <script src="{% static 'Loginpage/js/popper.js' %}"></script>
   <script src="{% static 'Loginpage/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'Loginpage/js/main.js' %}"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'success' %}
+        <script>
+            swal('{{i}}',"",'success')
+        </script>
+        {% elif i.tags == 'warning' %}
+        <script>
+            swal('{{i}}',"",'warning')
+        </script>
+        {% elif i.tags == 'info' %}
+        <script>
+            swal('{{i}}',"",'info')
+        </script>
+        {% else %}
+        <script>
+            swal('{{i}}',"",'error')
+        </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 
 	</body>
 </html>

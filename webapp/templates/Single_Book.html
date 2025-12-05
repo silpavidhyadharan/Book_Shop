@@ -163,22 +163,41 @@
 									<div class="item-price">Rs. {{book.price}}</div>
 
 
-                                <form>
-                                  <input type="number" placeholder="Quantity" id="quantity" class="form-control" min="1">
-								  <input type="text" value="{{book.price}}" id="price" class="form-control">
-                                  <input type="text" placeholder="Total" id="total" class="form-control">
-
 									{% if request.session.Name %}
-                                  <div class="btn-wrap">
-                                      <button type="submit" style="border-radius:10px;" ><a href="{% url 'cart_page' %}" class="btn-accent-arrow">Add to cart</a></button>
-                                  </div>
+									<form method="post" action="{% url 'save_to_cart' %}">
+										{% csrf_token %}
+
+										<!-- Quantity -->
+										<input type="number" placeholder="Quantity" name="quantity" id="quantity"
+											   class="form-control" min="1" required>
+
+										<!-- Price -->
+										<input type="text" value="{{ book.price }}" name="price" id="price"
+											   class="form-control" readonly>
+
+										<!-- Total -->
+										<input type="text" placeholder="Total" name="Total" id="total"
+											   class="form-control" readonly>
+
+										<!-- Username -->
+										<input type="hidden" name="username" value="{{ request.session.Name }}">
+
+										<!-- Book Name -->
+										<input type="hidden" name="Book_name" value="{{ book.title }}">
+
+										<div class="btn-wrap">
+											<button type="submit" style="border-radius:10px;" class="btn-accent-arrow">
+												Add to cart
+											</button>
+										</div>
+									</form>
 									{% else %}
-									<div class="btn-wrap">
-                                      <a  href="{% url 'login_page' %}" class="btn btn-primary">Login</a>
-                                  </div>
+										<div class="btn-wrap">
+											<a href="{% url 'login_page' %}" class="btn btn-primary">Login To Cart</a>
+										</div>
 									{% endif %}
 
-                                  </form>
+
 									<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 									<script>
 										$(document).ready(function(){

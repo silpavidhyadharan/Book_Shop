@@ -15,4 +15,5 @@ urlpatterns = [
     path('user_logout/',views.user_logout,name="user_logout"),
     path('cart_page/',views.cart_page,name="cart_page"),
     path('save_contact/',views.save_contact,name="save_contact"),
+    path('save_to_cart/',views.save_to_cart,name="save_to_cart"),
 ]

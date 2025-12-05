@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from adminApp.models import CategoryDb,BookDb
-from webapp.models import SignUpDb,ContactDb
+from webapp.models import SignUpDb,ContactDb,CartDb
+from django.contrib import messages
+
 # Create your views here.
 def home_page(request):
     categories = CategoryDb.objects.all()
@@ -47,12 +49,15 @@ def save_signup_data(request):
         obj  = SignUpDb(Name=username,email=user_email,password=user_password,confirm_password=confirm_password)
         if SignUpDb.objects.filter(Name=username).exists():
             # Alert Username already exists
+            messages.error(request,"User Already Exist..!")
             return redirect(signup_page)
         elif SignUpDb.objects.filter(email=user_email).exists():
+            messages.warning(request,"User Already Exist..!")
             return redirect(signup_page)
 
         else:
             obj.save()
+            messages.success(request,"Login Successful..!")
             return redirect(login_page)
 
 def user_login(request):
@@ -62,10 +67,13 @@ def user_login(request):
         if SignUpDb.objects.filter(Name=un,password=pswd).exists():
             request.session['Name']=un
             request.session['password']=pswd
+            messages.success(request,"Login Successful...!")
             return redirect(home_page)
         else:
+            messages.warning(request,"Login Failed")
             return redirect(login_page)
     else:
+        messages.warning(request, "Login Failed")
         return redirect(login_page)
 
 def save_contact(request):
@@ -76,6 +84,7 @@ def save_contact(request):
         user_message = request.POST.get('message')
         obj = ContactDb(name=user_name,email=user_email,subject=user_subject,message=user_message)
         obj.save()
+        messages.success(request,"Sent Message Successfully...!..!")
         return redirect(contact_page)
 
 def display_messages(request):
@@ -83,9 +92,25 @@ def display_messages(request):
     return render(request,"View_messages.html",{'data':data})
 
 def user_logout(request):
-    del request.session['Name']
-    del request.session['password']
+    request.session.pop('Name', None)
+    request.session.pop('password', None)
+    messages.success(request, "Logout Successful...!")
     return redirect(login_page)
 
+
 def cart_page(request):
-    return render(request,"Cart_page.html")
+    books = CartDb.objects.all()
+    return render(request,"Cart_page.html",{'books':books})
+
+def save_to_cart(request):
+    book_name = request.POST.get('Book_name')
+    quantity = int(request.POST.get('quantity'))
+    price = int(request.POST.get('price'))
+    total = int(request.POST.get('Total'))
+    username = request.POST.get('username')
+    book = BookDb.objects.filter(title=book_name).first()
+    img = book.cover_image if book else None
+    obj = CartDb(bookname=book_name,quantity=quantity,price=price,total_price=total,book_image=img,username=username)
+    obj.save()
+    messages.success(request,"Book Added To Cart..!")
+    return redirect(home_page)

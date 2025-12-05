@@ -123,15 +123,19 @@ def admin_login(request):
                 login(request,data)
                 request.session['username'] = un
                 request.session['password'] = pswd
+                messages.success(request,"Login Successfully...!")
                 return redirect(index_page)
             else:
+                messages.warning(request,"Login Failed..!")
                 return redirect(admin_login_page)
         else:
+            messages.warning(request,"Login Failed..!")
             return redirect(admin_login_page)
 
 def admin_logout(request):
     del request.session['username']
     del request.session['password']
+    messages.success(request,"Logout Successfully...!")
     return redirect(admin_login_page)
 
 def view_messages(request):

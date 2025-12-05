@@ -1,94 +1,122 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Shopping Cart</title>
+    <title>Cart Page</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: "Segoe UI";
+        }
+
+        .cart-card {
+            border-radius: 10px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        table img {
+            width: 55px;
+            height: 55px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .summary-box {
+            border-radius: 10px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .summary-box p {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .summary-box h4 {
+            font-weight: 700;
+        }
+    </style>
 </head>
-<body class="bg-light">
 
-<div class="container py-5">
+<body>
 
-    <h2 class="mb-4 text-center">Your Shopping Cart</h2>
+<div class="container mt-5">
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover align-middle text-center bg-white">
+    <h2 class="text-center mb-4 fw-bold">Your Cart Items</h2>
+
+    <!-- CART TABLE -->
+    <div class="cart-card mb-4">
+        <table class="table table-bordered text-center align-middle">
             <thead class="table-dark">
                 <tr>
                     <th>Book Name</th>
-                    <th>Book Image</th>
+                    <th>Qty</th>
                     <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                    <th>Options</th>
+                    <th>Total</th>
+                    <th>Image</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
             <tbody>
-                <!-- Dummy Product 1 -->
-                <tr>
-                    <td>The Great Gatsby</td>
-                    <td><img src="https://via.placeholder.com/80" class="img-fluid rounded" alt="Book 1"></td>
-                    <td>$15</td>
-                    <td><input type="number" class="form-control text-center" value="1" min="1" style="width: 80px;"></td>
-                    <td>$15</td>
-                    <td><button class="btn btn-danger btn-sm">Remove</button></td>
-                </tr>
+            {% for i in books %}
+            <tr>
+               <td>{{i.bookname}}</td>
+               <td>{{i.quantity}}</td>
+               <td>{{i.price}}</td>
+               <td>{{i.total_price}}</td>
+               <td>{{i.book_image}}</td>
+               <td>
+                   <a>
+                       <button class="btn btn-danger">Delete</button>
+                   </a>
+               </td>
+            </tr>
+            {% endfor %}
 
-                <!-- Dummy Product 2 -->
-                <tr>
-                    <td>To Kill a Mockingbird</td>
-                    <td><img src="https://via.placeholder.com/80" class="img-fluid rounded" alt="Book 2"></td>
-                    <td>$18</td>
-                    <td><input type="number" class="form-control text-center" value="1" min="1" style="width: 80px;"></td>
-                    <td>$18</td>
-                    <td><button class="btn btn-danger btn-sm">Remove</button></td>
-                </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Centered Cart Summary Form -->
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-header bg-dark text-white text-center">
-                    <h5 class="mb-0">Cart Summary</h5>
-                </div>
+    <!-- SUMMARY BOX -->
+    <div class="summary-box mx-auto" style="max-width: 350px;">
+        <h4 class="text-center mb-3">Cart Summary</h4>
 
-                <div class="card-body">
-                    <form>
-                        <div class="mb-3 d-flex justify-content-between">
-                            <span>Subtotal:</span>
-                            <span>$33</span>
-                        </div>
+        <p class="d-flex justify-content-between">
+            <span>Subtotal:</span>
+            <strong>₹1850</strong>
+        </p>
 
-                        <div class="mb-3 d-flex justify-content-between">
-                            <span>Delivery:</span>
-                            <span>$5</span>
-                        </div>
+        <p class="d-flex justify-content-between">
+            <span>Delivery:</span>
+            <strong>₹40</strong>
+        </p>
 
-                        <hr>
+        <p class="d-flex justify-content-between">
+            <span>Discount:</span>
+            <strong>₹100</strong>
+        </p>
 
-                        <div class="mb-3 d-flex justify-content-between fw-bold">
-                            <span>Total:</span>
-                            <span>$38</span>
-                        </div>
+        <hr>
 
-                        <button type="submit" class="btn btn-primary w-100">Checkout</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <p class="d-flex justify-content-between fs-5 fw-bold">
+            <span>Total:</span>
+            <span>₹1790</span>
+        </p>
+
+        <button class="btn btn-primary w-100 mt-2">Checkout</button>
     </div>
 
 </div>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
