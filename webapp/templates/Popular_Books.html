@@ -31,22 +31,6 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-6">
-<!--						<div class="social-links">-->
-<!--							<ul>-->
-<!--								<li>-->
-<!--									<a href="#"><i class="icon icon-facebook"></i></a>-->
-<!--								</li>-->
-<!--								<li>-->
-<!--									<a href="#"><i class="icon icon-twitter"></i></a>-->
-<!--								</li>-->
-<!--								<li>-->
-<!--									<a href="#"><i class="icon icon-youtube-play"></i></a>-->
-<!--								</li>-->
-<!--								<li>-->
-<!--									<a href="#"><i class="icon icon-behance-square"></i></a>-->
-<!--								</li>-->
-<!--							</ul>-->
-<!--						</div>&lt;!&ndash;social-links&ndash;&gt;-->
 					</div>
 					<div class="col-md-6">
 						<div class="right-element">
@@ -61,8 +45,9 @@
 							{% endif %}
 <!--							<a href="#" class="user-account for-buy"><i-->
 <!--									class="icon icon-user"></i><span>Account</span></a>-->
-							<a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart</span></a>
-
+							{% if request.session.Name %}
+							<a href="{% url 'cart_page' %}" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart {{cart_total}}</span></a>
+							{% endif %}
 							<div class="action-menu">
 
 								<div class="search-bar">
@@ -112,7 +97,7 @@
 										</ul>
 
 									</li>
-									<li class="menu-item active"><a href="{% url 'popular_books_page' %}" class="nav-link">Popular Books</a></li>
+									<li class="menu-item"><a href="{% url 'popular_books_page' %}" class="nav-link active">Popular Books</a></li>
 									<li class="menu-item"><a href="{% url 'contact_page' %}" class="nav-link">Contact</a></li>
 									<li class="menu-item"><a href="{% url 'checkout_page' %}" class="nav-link">Check Out</a></li>
 

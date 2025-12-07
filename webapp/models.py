@@ -22,3 +22,13 @@ class CartDb(models.Model):
     total_price = models.IntegerField(null=True,blank=True)
     book_image = models.ImageField(upload_to="Cart Images",null=True,blank=True)
 
+class CheckoutDb(models.Model):
+    first_name = models.CharField(max_length=100,null=True,blank=True)
+    last_name = models.CharField(max_length=100,null=True,blank=True)
+    email = models.EmailField(max_length=100,null=True,blank=True)
+    phone = models.IntegerField(null=True,blank=True)
+    address = models.CharField(max_length=100,null=True,blank=True)
+    city = models.CharField(max_length=100,null=True,blank=True)
+    pincode = models.IntegerField(null=True,blank=True)
+    total = models.IntegerField(null=True,blank=True)
+

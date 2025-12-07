@@ -45,8 +45,9 @@
 							{% endif %}
 <!--							<a href="#" class="user-account for-buy"><i-->
 <!--									class="icon icon-user"></i><span>Account</span></a>-->
-							<a href="{% url 'cart_page' %}" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart</span></a>
-
+							{% if request.session.Name %}
+							<a href="{% url 'cart_page' %}" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart {{cart_total}}</span></a>
+							{% endif %}
 							<div class="action-menu">
 
 								<div class="search-bar">

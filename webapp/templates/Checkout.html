@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 
 <head>
 	<title>BookSaw - About</title>
@@ -31,22 +31,6 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-6">
-<!--						<div class="social-links">-->
-<!--							<ul>-->
-<!--								<li>-->
-<!--									<a href="#"><i class="icon icon-facebook"></i></a>-->
-<!--								</li>-->
-<!--								<li>-->
-<!--									<a href="#"><i class="icon icon-twitter"></i></a>-->
-<!--								</li>-->
-<!--								<li>-->
-<!--									<a href="#"><i class="icon icon-youtube-play"></i></a>-->
-<!--								</li>-->
-<!--								<li>-->
-<!--									<a href="#"><i class="icon icon-behance-square"></i></a>-->
-<!--								</li>-->
-<!--							</ul>-->
-<!--						</div>&lt;!&ndash;social-links&ndash;&gt;-->
 					</div>
 					<div class="col-md-6">
 						<div class="right-element">
@@ -61,8 +45,9 @@
 							{% endif %}
 <!--							<a href="#" class="user-account for-buy"><i-->
 <!--									class="icon icon-user"></i><span>Account</span></a>-->
-							<a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart</span></a>
-
+							{% if request.session.Name %}
+							<a href="{% url 'cart_page' %}" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart {{cart_total}}</span></a>
+							{% endif %}
 							<div class="action-menu">
 
 								<div class="search-bar">
@@ -147,59 +132,52 @@
             <div class="col-lg-7">
                 <div class="card shadow-sm border-0 p-4">
                     <h5 class="mb-4">Billing Details</h5>
-                    <form>
+                    <form method="post" action="{% url 'save_checkout_data' %}">
+						{% csrf_token %}
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" id="firstName" class="form-control">
+                                <input type="text" id="firstName" name="f_name" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" id="lastName" class="form-control">
+                                <input type="text" id="lastName" name="l_name" class="form-control">
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address</label>
-                            <input type="email" id="email" class="form-control">
+                            <input type="email" id="email" name="c_email" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="tel" id="phone" class="form-control">
+                            <input type="tel" id="phone" name="c_phone" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" id="address" class="form-control">
+                            <input type="text" id="address" name="c_address" class="form-control">
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="city" class="form-label">City</label>
-                                <input type="text" id="city" class="form-control">
+                                <input type="text" id="city" name="c_city" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="zip" class="form-label">Postal Code</label>
-                                <input type="text" id="zip" class="form-control">
+                                <label for="zip" class="form-label">Pin Code</label>
+                                <input type="text" id="zip" name="c_pincode" class="form-control">
+                            </div>
+							<div class="col-md-6 mb-3">
+                                <label for="zip" class="form-label"></label>
+                                <input type="hidden" value="{{total_amount}}" placeholder="Total" id="value" name="c_total" class="form-control">
                             </div>
                         </div>
+						<div>
+							<button type="submit" class="btn btn-dark w-100 py-2">Place Order</button>
 
-                        <div class="mb-3">
-                            <label for="country" class="form-label">Country</label>
-                            <select id="country" class="form-select">
-                                <option value="">Select Country</option>
-                                <option>United States</option>
-                                <option>United Kingdom</option>
-                                <option>Canada</option>
-                                <option>Australia</option>
-                            </select>
-                        </div>
-
-                        <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" id="createAccount">
-                            <label class="form-check-label" for="createAccount">Create an account?</label>
-                        </div>
+						</div>
                     </form>
                 </div>
             </div>
@@ -211,45 +189,23 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Book</th>
-                                <th class="text-end">Total</th>
+                                <th>Sub Total</th>
+                                <th class="text-end">{{sub_total}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Book Price</td>
-                                <td class="text-end">1200</td>
-                            </tr>
-                            <tr>
-                                <td>GST</td>
-                                <td class="text-end">50</td>
-                            </tr>
-                            <tr>
-                                <td>Shipping</td>
-                                <td class="text-end">200</td>
+                                <td>Delivery</td>
+                                <td class="text-end">{{delivery_charge}}</td>
                             </tr>
                             <tr class="fw-bold">
                                 <td>Total</td>
-                                <td class="text-end">1450</td>
+                                <td class="text-end">{{total_amount}}</td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <h6 class="mt-4 mb-3">Payment Method</h6>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="payment" id="creditCard" checked>
-                        <label class="form-check-label" for="creditCard">Credit / Debit Card</label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="payment" id="paypal">
-                        <label class="form-check-label" for="paypal">Gpay</label>
-                    </div>
-                    <div class="form-check mb-4">
-                        <input class="form-check-input" type="radio" name="payment" id="cod">
-                        <label class="form-check-label" for="cod">Cash on Delivery</label>
-                    </div>
-
-                    <button type="submit" class="btn btn-dark w-100 py-2">Place Order</button>
+<!--                    <button type="submit" class="btn btn-dark w-100 py-2">Place Order</button>-->
                 </div>
             </div>
         </div>
