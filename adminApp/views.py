@@ -37,7 +37,7 @@ def edit_category(request,c_id):
 def delete_category(request,cat_id):
     data = CategoryDb.objects.filter(id=cat_id)
     data.delete()
-    messages.error(request,"Category deleted successfully..!")
+    messages.warning(request,"Category deleted successfully..!")
     return redirect(display_category)
 
 def update_category(request,category_id):
@@ -88,7 +88,7 @@ def edit_book(request,book_id):
 def delete_book(request,b_id):
     data = BookDb.objects.filter(id=b_id)
     data.delete()
-    messages.error(request,"Book Details Deleted..!")
+    messages.warning(request,"Book Details Deleted..!")
     return redirect(display_Book)
 
 def update_book_data(request,Book_id):
@@ -136,7 +136,7 @@ def admin_logout(request):
     del request.session['username']
     del request.session['password']
     messages.success(request,"Logout Successfully...!")
-    return redirect(admin_login_page)
+    return redirect(index_page)
 
 def view_messages(request):
     data = ContactDb.objects.all()
@@ -145,5 +145,5 @@ def view_messages(request):
 def delete_message(request,message_id):
     data = ContactDb.objects.filter(id=message_id)
     data.delete()
-    messages.error(request,"Message Deleted Successfully..!")
+    messages.warning(request,"Message Deleted Successfully..!")
     return redirect(view_messages)

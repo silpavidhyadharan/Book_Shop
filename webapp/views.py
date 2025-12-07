@@ -198,6 +198,7 @@ def save_checkout_data(request):
     obj = CheckoutDb(first_name=f_name,last_name=l_name,email=user_email,phone=user_phone,address=user_address,city=user_city,
                     pincode = user_pincode,total=total_amount)
     obj.save()
+    messages.success(request,"Payment Processing..!")
     return redirect(payment_page)
 
 def payment_page(request):

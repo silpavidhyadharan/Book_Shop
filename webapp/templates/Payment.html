@@ -123,14 +123,26 @@
 	</div><!--header-wrap-->
 
 	<section id="quotation" class="align-center pb-5 mb-5">
-		<div class="inner-content">
-			<h2 class="section-title divider" style="padding-top:40px;">Payment Page</h2>
-			<blockquote data-aos="fade-up">
-				<q>“Make your Payments Here.”</q>
-			</blockquote>
-            <button type="submit" style="border-radius:10px;" class="btn-accent-arrow">Proceed to Payment</button>
-		</div>
-	</section>
+    <div class="inner-content"><br>
+
+        <h2 class="section-title divider" style="padding-top:40px;">Payment Page</h2>
+
+        <!-- Added Image (You can replace with your own path) -->
+<!--        <img src="{% static 'web/images/payment.jpg' %}"-->
+<!--             alt="Payment Image"-->
+<!--             style="width:300px; margin:20px auto; display:block;">-->
+
+        <blockquote data-aos="fade-up">
+            <q>“Make your Payments Here.”</q>
+        </blockquote>
+
+        <button type="submit" style="border-radius:10px;" class="btn-accent-arrow">
+            Proceed to Payment
+        </button>
+
+    </div>
+</section>
+
 
 		<footer id="footer">
 		<div class="container">
@@ -294,6 +306,28 @@
 		crossorigin="anonymous"></script>
 	<script src="{% static 'web/js/plugins.js' %}"></script>
 	<script src="{% static 'web/js/script.js' %}"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'success' %}
+        <script>
+            swal('{{i}}',"",'success')
+        </script>
+        {% elif i.tags == 'warning' %}
+        <script>
+            swal('{{i}}',"",'warning')
+        </script>
+        {% elif i.tags == 'info' %}
+        <script>
+            swal('{{i}}',"",'info')
+        </script>
+        {% else %}
+        <script>
+            swal('{{i}}',"",'error')
+        </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 
 </body>
 
