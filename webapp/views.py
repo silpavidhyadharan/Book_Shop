@@ -4,6 +4,7 @@ from django.template.defaultfilters import first
 from adminApp.models import CategoryDb,BookDb
 from webapp.models import SignUpDb,ContactDb,CartDb,CheckoutDb
 from django.contrib import messages
+import razorpay
 
 # Create your views here.
 def home_page(request):
@@ -202,4 +203,12 @@ def save_checkout_data(request):
     return redirect(payment_page)
 
 def payment_page(request):
+    # Adding Details for payment
+    # Retrieving the Data from CheckoutDB with the specified ID
+    customer = CheckoutDb.objects.orderby('-id').first()
+
+    # Get amount of specified Customer
+    pay = customer.total
+    amount = int(pay*100)
+    pay_str = str(amount)
     return render(request,"Payment.html")
