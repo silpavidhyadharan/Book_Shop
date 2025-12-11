@@ -17,11 +17,13 @@ urlpatterns = [
     path('edit_book/<int:book_id>/',views.edit_book,name="edit_book"),
     path('update_book_data/<int:Book_id>/',views.update_book_data,name="update_book_data"),
 
-    path('admin_login_page/',views.admin_login_page,name="admin_login_page"),
+    path('',views.admin_login_page,name="admin_login_page"),
     path('admin_login/',views.admin_login,name="admin_login"),
     path('admin_logout/',views.admin_logout,name="admin_logout"),
     path('view_messages/',views.view_messages,name="view_messages"),
-    path('delete_message/<int:message_id>/', views.delete_message, name="delete_message")
+    path('delete_message/<int:message_id>/', views.delete_message, name="delete_message"),
+    path('order_details/',views.order_details,name="order_details"),
+    path('delete_order/<int:order_id>/',views.delete_order,name="delete_order")
 
 ]
 

@@ -136,9 +136,11 @@
             <q>“Make your Payments Here.”</q>
         </blockquote>
 
-        <button type="submit" style="border-radius:10px;" class="btn-accent-arrow">
+		<form>
+        <button type="submit" id="paybtn" style="border-radius:10px;" class="btn-accent-arrow">
             Proceed to Payment
         </button>
+		</form>
 
     </div>
 </section>
@@ -306,6 +308,31 @@
 		crossorigin="anonymous"></script>
 	<script src="{% static 'web/js/plugins.js' %}"></script>
 	<script src="{% static 'web/js/script.js' %}"></script>
+	<!--Razorpay script-->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+    var options = {
+        "key": "rzp_test_0ib0jPwwZ7I1lT",
+        "amount": "{{ pay_str }}",
+        "currency": "INR",
+        "name": "book_shop",
+        "description": "Order Payment",
+
+        "handler": function (response){
+            // When payment succeeds, redirect to Django success page
+            window.location.href = "/book_shop/payment_success/";
+        }
+    };
+
+    var rzp = new Razorpay(options);
+
+    document.getElementById("paybtn").onclick = function(e){
+        rzp.open();
+        e.preventDefault();
+    }
+</script>
+
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {% if messages %}
     {% for i in messages %}

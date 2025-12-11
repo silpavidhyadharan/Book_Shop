@@ -133,7 +133,7 @@ def save_contact(request):
         user_message = request.POST.get('message')
         obj = ContactDb(name=user_name,email=user_email,subject=user_subject,message=user_message)
         obj.save()
-        messages.success(request,"Sent Message Successfully...!..!")
+        messages.success(request,"Sent Message Successfully...!")
         return redirect(contact_page)
 
 def display_messages(request):
@@ -203,12 +203,32 @@ def save_checkout_data(request):
     return redirect(payment_page)
 
 def payment_page(request):
-    # Adding Details for payment
-    # Retrieving the Data from CheckoutDB with the specified ID
-    customer = CheckoutDb.objects.orderby('-id').first()
+    categories = CategoryDb.objects.all()
+    cart_total = 0
+    uname = request.session.get('Name')
+    if uname:
+        cart_total = CartDb.objects.filter(username=uname).count()
 
-    # Get amount of specified Customer
+
+    # Adding details for payment
+    # Retrieve the data from OrderDb with the specified ID
+    customer = CheckoutDb.objects.order_by('-id').first()
+    # Get the amount of the specified customer
     pay = customer.total
     amount = int(pay*100)
     pay_str = str(amount)
-    return render(request,"Payment.html")
+
+    if request.method == "POST":
+        client = razorpay.Client(auth=('rzp_test_0ib0jPwwZ7I1lT', 'VjHNO5zKeKxz8PYe7VnzwxMR'))
+        payment = client.order.create({'amount':amount, 'currency': 'INR'})
+
+    return render(request, "Payment.html", {'categories':categories, 'cart_total':cart_total,
+                                            'pay_str': pay_str})
+
+def payment_success(request):
+    uname = request.session.get('Name')
+
+    if uname:
+        CartDb.objects.filter(username=uname).delete()
+    messages.success(request, "Payment successful! Thank you for your purchase.")
+    return redirect('home_page')

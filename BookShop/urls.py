@@ -23,7 +23,7 @@ import webapp.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('book_shop_admin/',include(adminApp.urls)),
+    path('',include(adminApp.urls)),
     path('book_shop/',include(webapp.urls))
 ]
 

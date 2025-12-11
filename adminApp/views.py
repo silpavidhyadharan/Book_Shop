@@ -7,12 +7,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from django.contrib import messages
 from webapp.models import ContactDb
-
+from webapp.models import CheckoutDb
 # Create your views here.
 def index_page(request):
     books = BookDb.objects.count()
     categories = CategoryDb.objects.count()
-    return render(request,"index.html",{'books':books,'categories':categories})
+    orders = CheckoutDb.objects.count()
+    return render(request,"index.html",{'books':books,'categories':categories,'orders':orders})
 
 # -----------------------------------------CATEGORY-----------------------------------------------------
 
@@ -123,7 +124,7 @@ def admin_login(request):
                 login(request,data)
                 request.session['username'] = un
                 request.session['password'] = pswd
-                messages.success(request,"Login Successfully...!")
+                messages.success(request,"Login Successful...!")
                 return redirect(index_page)
             else:
                 messages.warning(request,"Login Failed..!")
@@ -135,7 +136,7 @@ def admin_login(request):
 def admin_logout(request):
     del request.session['username']
     del request.session['password']
-    messages.success(request,"Logout Successfully...!")
+    messages.success(request,"Logout Successful...!")
     return redirect(index_page)
 
 def view_messages(request):
@@ -147,3 +148,14 @@ def delete_message(request,message_id):
     data.delete()
     messages.warning(request,"Message Deleted Successfully..!")
     return redirect(view_messages)
+
+def order_details(request):
+    data = CheckoutDb.objects.all()
+    return render(request,"Orders.html",{'data':data})
+
+
+def delete_order(request,order_id):
+    data = CheckoutDb.objects.filter(id=order_id)
+    data.delete()
+    messages.warning(request,"Message Deleted Successfully..!")
+    return redirect(order_details)
